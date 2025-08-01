@@ -8,21 +8,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import { toast } from "sonner";
 
-const suggestList = [
-    {
-        url: 'https://full-link.com',
-        urlShort: 'https://short-link.com',
-    },
-    {
-        url: 'https://full-link.com',
-        urlShort: 'https://short-link.com',
-    },
-    {
-        url: 'https://full-link.com',
-        urlShort: 'https://short-link.com',
-    },
-]
-
 export default function Result(props: React.HTMLAttributes<HTMLDivElement>) {
     const {
         className = '',
@@ -31,15 +16,9 @@ export default function Result(props: React.HTMLAttributes<HTMLDivElement>) {
 
     const [inputValue, setInputValue] = useState<string>('');
     const [errorText, setErrorText] = useState<string>('');
-    const [url, setUrl] = useState<string>('');
     const [result, setResult] = useState<string>('');
     const [loading, setLoading] = useState(false);
     const [loadingCopy, setLoadingCopy] = useState(false);
-
-    const reset = () => {
-        setInputValue('')
-        setUrl('')
-    }
 
     const proceed = () => {
         // Check if the input is empty
@@ -48,20 +27,29 @@ export default function Result(props: React.HTMLAttributes<HTMLDivElement>) {
             return
         } else {
             setErrorText('');
-            // const postBody = {
-            //     url: inputValue,
-            // }
             setLoading(true)
             axios.get('https://is.gd/create.php', { params: { format: "json", url: inputValue } }).then((res) => {
                 console.log(res.data)
 
-                res?.data?.errorcode ? setErrorText(res.data.errormessage) : setErrorText('')
-                res?.data?.shorturl ? setResult(res.data.shorturl) : setResult('')
+                // res?.data?.errorcode ? setErrorText(res.data.errormessage) : setErrorText('')
+                // res?.data?.shorturl ? setResult(res.data.shorturl) : setResult('')
+
+                if (res?.data?.errorcode) {
+                    setErrorText(res.data.errormessage)
+                } else {
+                    setErrorText('')
+                }
+
+                if (res?.data?.shorturl) {
+                    setResult(res.data.shorturl)
+                } else {
+                    setResult('')
+                }
 
             }).catch((e) => {
                 console.log(e)
                 setErrorText(`Oops, something's wrong. Please try again later.`)
-                reset()
+                setInputValue('')
             }).finally(() => {
                 setLoading(false)
             })

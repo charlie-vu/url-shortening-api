@@ -15,7 +15,7 @@ export default function Header() {
                     </div>
                     {
                         footerList.map((item, i) =>
-                            <div key={`footer-${item.name}`}>
+                            <div key={`footer-${item.name}-${i}`}>
                                 <h4 className="text-white font-bold">{item.name}</h4>
                                 <div className="mt-6 flex flex-col gap-2">
                                     {
