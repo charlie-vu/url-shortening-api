@@ -1,0 +1,47 @@
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+  @media (min-width: 1400px) {
+    max-width: 1320px;
+  }
+  @media (min-width: 1600px) {
+    max-width: 1440px;
+  }
+}
+.btn {
+  font-weight: bold;
+  &:hover {
+    filter: opacity(0.6);
+  }
+}
+
+button {
+  cursor: pointer;
+  &:active {
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+      inset -2px 2px 4px rgba(0, 0, 0, 0.1),
+      inset 2px -2px 4px rgba(0, 0, 0, 0.1),
+      inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
